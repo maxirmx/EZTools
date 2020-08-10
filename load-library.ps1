@@ -1,3 +1,8 @@
+# --------------------------------------------------------------------
+# This powershaell script is a part of Project Û
+# It is used  to load and extract a library from one of maxirmx repos
+# --------------------------------------------------------------------
+
 param (
    [parameter(Mandatory=$true)][string]$libname,
 #  platform: either 'X64' or 'x86'
