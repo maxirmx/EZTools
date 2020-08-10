@@ -12,13 +12,13 @@ switch($platform) {
    "X64"   { break; } 
    "x86"   { break; } 
    "amd64" { $platform = "X64"; break; } 
-   default { "load-libraries.ps1: platform \"$platform\" was not recognized"; exit (-1);  } 
+   default { "load-libraries.ps1: platform `"$platform`" was not recognized"; exit (-1);  } 
 }
 
 switch($configuration) {
    "release"   { break; } 
    "debug"     { break; } 
-   default     { "load-libraries.ps1: configuration \"$configuration\" was not recognized"; exit (-1);  } 
+   default     { "load-libraries.ps1: configuration `"$configuration`" was not recognized"; exit (-1);  } 
 }
 
 
