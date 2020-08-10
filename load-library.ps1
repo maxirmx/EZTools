@@ -36,8 +36,11 @@ Set-Location -Path $dname
 try {
  Invoke-WebRequest -Uri $uri -ErrorAction Stop -OutFile $fname
 } catch {
- "load-libraries.ps1 failed to access or load from uri <$uri>"; exit (-2);
+ "load-libraries.ps1 failed to access or load from uri `"$uri`""; 
+ Set-Location -Path ..
+ exit (-2);
 }
+
 & "C:\Program Files\7-Zip\7z" -tzip -aoa x $fname
 Remove-Item $fname
 
