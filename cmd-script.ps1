@@ -4,12 +4,11 @@
 # (It is used to call vcvarsall.bat for given environment and save configuration)
 # --------------------------------------------------------------------
 
-
 param(
 #  scriptName:        yes, it is the script name 
-    [string(Mandatory=$true)]]  $scriptName
+    [parameter(Mandatory=$true)][string]  $scriptName
 #  scriptArgs:        script arguments 
-    [string(Mandatory=$false)]] $scriptArgs
+    [parameter(Mandatory=$false)][string] $scriptArgs
 )
 
 $cmdLine = """$scriptName"" $scriptArgs & set"
