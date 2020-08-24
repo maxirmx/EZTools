@@ -6,7 +6,7 @@
 
 param(
 #  scriptName:        yes, it is the script name 
-    [parameter(Mandatory=$true)][string]  $scriptName
+    [parameter(Mandatory=$true)][string]  $scriptName,
 #  scriptArgs:        script arguments 
     [parameter(Mandatory=$false)][string] $scriptArgs
 )
