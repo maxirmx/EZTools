@@ -27,6 +27,10 @@ $Targets = dir -Path $deployRoot  -Include *.dll,*.lib,*.exe -Recurse | %{$_.Bas
 # Full paths
 $PDBs = dir -Path $buildRoot  -Include *.pdb  -Recurse | %{$_.FullName}
 
+# PDBs ought to be an array
+# This is for the case when only single PDB file was found
+$PDBs = ,$PDBs
+
 for ($i=0; $i -lt $Targets.count; $i+=2) {
 # .pdb is required otherwise it may find folder name or some other file 
   $filter = $Targets[$i] + ".pdb"
@@ -41,10 +45,10 @@ for ($i=0; $i -lt $Targets.count; $i+=2) {
 
   $match = $PDBs -match $filter
   if ($null -ne $match -and $match.count -gt 0) {
-    "Found PDB: <" + $match[0] + "> for target <" + $filter +">. Copying to: <" + $Targets[$i+1] + "\" + $Targets[$i] + ".pdb" + ">."
+    "Found PDB: <" + $match[0] + "> for target <" + $Targets[$i] +">. Copying to: <" + $Targets[$i+1] + "\" + $filter + ">."
     Copy-Item   -Path $match[0] -Destination ($Targets[$i+1] + "\" + $Targets[$i] + ".pdb") -Force
   } else {
-    "No PDB for <" + $filter + ">. Skipping." 
+    "No PDB for <" + $Targets[$i] + ">. Skipping." 
   }
 }
 
