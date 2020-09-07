@@ -53,7 +53,7 @@ for ($i=0; $i -lt $Targets.count; $i+=2) {
   $match = $PDBs -match $filter
   if ($null -ne $match -and $match.count -gt 0) {
     "Found PDB: <" + $match[0] + "> for target <" + $Targets[$i] +">. Copying to: <" + $Targets[$i+1] + "\" + $filter + ">."
-    Copy-Item   -Path $match[0] -Destination ($Targets[$i+1] + "\" + $match[0] + ".pdb") -Force
+    Copy-Item   -Path $match[0] -Destination ($Targets[$i+1] + "\" + $filter) -Force
   } else {
     "No PDB for <" + $Targets[$i] + ">. Skipping." 
   }
