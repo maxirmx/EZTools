@@ -33,7 +33,6 @@ if ($PDBs -isnot [system.array]) {
 }
 
 for ($i=0; $i -lt $Targets.count; $i+=2) {
-# .pdb is required otherwise it may find folder name or some other file 
   $filter = "-- nothing --"
 
   for ($j=0; $j -lt $Subst.count; $j+=2) {
@@ -45,8 +44,11 @@ for ($i=0; $i -lt $Targets.count; $i+=2) {
   }
 
   if ($filter -eq "-- nothing --") {
-    $Targets[$i] + ".pdb"
+    $filter = $Targets[$i]
   }
+
+# .pdb is required otherwise it may find folder name or some other file 
+  $filter = $filter  + ".pdb"
 
   $match = $PDBs -match $filter
   if ($null -ne $match -and $match.count -gt 0) {
