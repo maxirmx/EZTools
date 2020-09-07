@@ -28,7 +28,9 @@ $PDBs = dir -Path $buildRoot  -Include *.pdb  -Recurse | %{$_.FullName}
 
 # PDBs ought to be an array
 # This is for the case when only single PDB file was found
-$PDBs = ,$PDBs
+if ($PDBs -isnot [system.array]) {
+ $PDBs = ,$PDBs
+}
 
 for ($i=0; $i -lt $Targets.count; $i+=2) {
 # .pdb is required otherwise it may find folder name or some other file 

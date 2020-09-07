@@ -1,6 +1,6 @@
 # --------------------------------------------------------------------
 # This powershaell script is a part of Project Û
-# It is used  to load and extract a library from one of maxirmx repos
+# It is used to load and extract a library from one of maxirmx repos
 # --------------------------------------------------------------------
 
 param (
