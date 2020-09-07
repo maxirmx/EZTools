@@ -12,10 +12,9 @@ Param (
 #  Subst: 	      a list of (optional) substitutions
  [parameter(Mandatory=$false)][string[]]$Subst
 #     install-pdb.ps1 ./d ./podofo/build  podofo,podofo_static
-#     would install PDBs from ./podofo/build  to ./d but podofo.pdb if not found would be 
-#     actually a copy of podofo_static.pdb       
+#     would install PDBs from ./podofo/build  to ./d but podofo_static.pdb would be used for podofo.pdb 
 #     install-pdb.ps1 ./d ./podofo/build  a,not_a,podofo,podofo_static would create 
-#     two substitutions a->not_a and podofo->podofo_static
+#     two matches a->not_a and podofo->podofo_static
 )
 
 
@@ -33,7 +32,7 @@ $PDBs = ,$PDBs
 
 for ($i=0; $i -lt $Targets.count; $i+=2) {
 # .pdb is required otherwise it may find folder name or some other file 
-  $filter = $Targets[$i] + ".pdb"
+  $filter = "-- nothing --"
 
   for ($j=0; $j -lt $Subst.count; $j+=2) {
 #    $Targets[$i] + " ? " + $Subst[$j] + " --> " + $Subst[$j+1]
@@ -43,10 +42,14 @@ for ($i=0; $i -lt $Targets.count; $i+=2) {
     }
   }
 
+  if ($filter -eq "-- nothing --") {
+    $Targets[$i] + ".pdb"
+  }
+
   $match = $PDBs -match $filter
   if ($null -ne $match -and $match.count -gt 0) {
     "Found PDB: <" + $match[0] + "> for target <" + $Targets[$i] +">. Copying to: <" + $Targets[$i+1] + "\" + $filter + ">."
-    Copy-Item   -Path $match[0] -Destination ($Targets[$i+1] + "\" + $Targets[$i] + ".pdb") -Force
+    Copy-Item   -Path $match[0] -Destination ($Targets[$i+1] + "\" + $match[0] + ".pdb") -Force
   } else {
     "No PDB for <" + $Targets[$i] + ">. Skipping." 
   }
