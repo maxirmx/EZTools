@@ -1,5 +1,5 @@
 # --------------------------------------------------------------------
-# This powershaell script is a part of Project Û
+# This powershell script is a part of Project Ã›
 # It invokes a shell script and clones its environment in the parent shell.
 # (It is used to call vcvarsall.bat for given environment and save configuration)
 # --------------------------------------------------------------------
